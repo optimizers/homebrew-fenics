@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Ensure we have Python
+brew install python
+
 # Pip stuff.
 pip install ffc
 
@@ -16,6 +19,8 @@ brew install boost --with-mpi --without-single
 
 brew tap homebrew/science
 brew install armadillo
+brew install cgal
+brew install petsc
 brew install scotch
 
 #2. Install FEniCS.
