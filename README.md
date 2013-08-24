@@ -9,7 +9,7 @@ A simple script to build [FEniCS](http://fenicsproject.org) on OSX relying on
     git clone ...
 
 3. Create a virtual environment if you would like:
-
+    ````
     # Install virtualenv and virtualenvwrapper if you haven't already
     brew install virtualenv
     brew install virtualenvwrapper
@@ -22,4 +22,5 @@ A simple script to build [FEniCS](http://fenicsproject.org) on OSX relying on
     # Create a virtualenv and activate it
     mkvirtualenv fenics
     workon fenics
+    ````
 
