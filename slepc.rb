@@ -2,21 +2,22 @@ require 'formula'
 
 class Slepc < Formula
   homepage 'http://www.grycap.upv.es/slepc'
-  url 'https://bitbucket.org/slepc/slepc/get/v3.3.tar.bz2'
-  sha1 '32c34c663fcdea6d8852662451c08dc41ecebc27'
-  version '3.3'
+  url 'http://www.grycap.upv.es/slepc/download/download.php?filename=slepc-3.4.2.tar.gz'
+  sha1 '38b384b22eeced67c85868a8f57d3c8f6514bc86'
+  version '3.4.2'
 
   depends_on 'petsc' => :build
-  depends_on :mpi => :cc
+  depends_on :mpi => [:cc, :f90]
   depends_on :fortran
-  env :std  # Build fails without this
+  depends_on :x11
 
   def install
+    ENV.deparallelize
     ENV['SLEPC_DIR'] = Dir.getwd
     ENV['PETSC_DIR'] = Formula.factory('petsc').prefix
-    system "./configure",
-      "--prefix=#{prefix}"
+    system "./configure", "--prefix=#{prefix}"
     system "make PETSC_ARCH=arch-installed-petsc"
-    system "make install PETSC_ARCH=arch-installed-petsc"
+    system "make PETSC_ARCH=arch-installed-petsc install"
+    system "make SLEPC_DIR=#{prefix} test"
   end
 end
