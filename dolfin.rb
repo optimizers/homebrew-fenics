@@ -6,7 +6,7 @@ class Dolfin < Formula
   head 'https://bitbucket.org/fenics-project/dolfin.git'
   version '1357c06'
 
-  depends_on 'metis4'   => :build
+  # depends_on 'metis'    => :build
   depends_on 'parmetis' => :build
   depends_on 'swig'     => :build
   depends_on 'cmake'    => :build
@@ -33,10 +33,10 @@ class Dolfin < Formula
     ENV['CGAL_DIR'] = Formula.factory('cgal').prefix
 
     # This seems necessary to find omp.h
-    ENV.append_to_cflags "-I#{Formula.factory('metis4').include}"
+    ENV.append_to_cflags "-I#{Formula.factory('metis').include}"
 
     # This is necessary to discover CGAL.
-    ENV.append_to_cflags "-frounding-math"
+    ENV.append_to_cxxflags "-frounding-math"
 
     mkdir 'build' do
       system "cmake", "..", *std_cmake_args
