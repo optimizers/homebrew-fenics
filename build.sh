@@ -42,6 +42,8 @@ brew install cgal
 brew install hdf5 --enable-parallel
 
 brew install petsc
+export PETSC_DIR=`brew --prefix petsc`
+export PETSC_ARCH='arch-installed-petsc'
 pip install petsc4py
 
 brew install parmetis
@@ -53,11 +55,13 @@ brew install https://raw.github.com/michaelwimmer/homebrew-science/e1806b4a754ef
 brew install pastix
 
 brew install slepc
+export SLEPC_DIR=`brew --prefix slepc`
 pip install slepc4py
 
 brew install sphinx
 
 brew install tao
+export TAO_DIR=`brew --prefix tao`
 pip install tao4py
 
 brew install vtk --with-qt --with-python
