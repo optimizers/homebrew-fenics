@@ -50,8 +50,8 @@ brew install parmetis
 
 brew install qt
 
-brew install https://raw.github.com/michaelwimmer/homebrew-science/e1806b4a754ef0575da2d798be6cce2f222c1bb8/scotch5.rb
-#brew install scotch  # Scotch 6 is not compatible with Pastix.
+#brew install https://raw.github.com/michaelwimmer/homebrew-science/e1806b4a754ef0575da2d798be6cce2f222c1bb8/scotch5.rb
+brew install scotch
 brew install pastix
 
 brew install slepc
