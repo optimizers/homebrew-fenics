@@ -80,7 +80,7 @@ class Pastix < Formula
     system "make examples"
     system "./example/bin/simple -lap 100"
     prefix.install 'config.in'    # For the record.
-    share.install Dir['example']  # Contains all test programs.
+    share.install 'example'       # Contains all test programs.
     ohai 'Simple test result is in ~/Library/Logs/Homebrew/pastix. Please check them.'
   end
 
@@ -88,7 +88,7 @@ class Pastix < Formula
     Dir.foreach("#{share}/example/bin") do |example|
       next if example =~ /^\./ or example =~ /plot_memory_usage/
       # The following tests currently crash.
-      next if example == 'fsimple' or example == 'isolate_zeros' or example == 'reentrant' or example == 'murge-product'
+      next if example == 'isolate_zeros' or example == 'murge-product'
       if example =~ /murge/
         system "#{share}/example/bin/#{example} 100 100"
       else
