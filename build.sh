@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Save these environment variables if they were set
+[[ ${PETSC_DIR+set}  == 'set' ]] && PETSC_DIR_BKUP=$PETSC_DIR
+[[ ${PETSC_ARCH+set} == 'set' ]] && PETSC_ARCH_BKUP=$PETSC_ARCH
+[[ ${SLEPC_DIR+set}  == 'set' ]] && SLEPC_DIR_BKUP=$SLEPC_DIR
+[[ ${TAO_DIR+set}    == 'set' ]] && TAO_DIR_BKUP=$TAO_DIR
+unset PETSC_DIR PETSC_ARCH SLEPC_DIR TAO_DIR
+
 # Ensure we have Python
 brew install python
 
@@ -42,27 +49,23 @@ brew install cgal
 brew install hdf5 --enable-parallel
 
 brew install petsc
-export PETSC_DIR=`brew --prefix petsc`
-export PETSC_ARCH='arch-installed-petsc'
-pip install petsc4py
+pip install mpi4py
+PETSC_DIR=$(brew --prefix petsc) PETSC_ARCH='arch-darwin-c-opt' pip install petsc4py
 
 brew install parmetis
 
 brew install qt
 
-#brew install https://raw.github.com/michaelwimmer/homebrew-science/e1806b4a754ef0575da2d798be6cce2f222c1bb8/scotch5.rb
 brew install scotch
 brew install pastix
 
 brew install slepc
-export SLEPC_DIR=`brew --prefix slepc`
-pip install slepc4py
+SLEPC_DIR=$(brew --prefix slepc) pip install slepc4py
 
 brew install sphinx
 
 brew install tao
-export TAO_DIR=`brew --prefix tao`
-pip install tao4py
+TAO_DIR=$(brew --prefix tao) pip install tao4py  # Not strictly necessary.
 
 brew install vtk --with-qt --with-python
 
@@ -70,5 +73,11 @@ brew install vtk --with-qt --with-python
 brew install trilinos --with-boost --with-scotch
 
 #2. Install FEniCS.
-brew install ufc
+brew install --HEAD ufc
 #brew install dolfin
+
+# Restore these environment variables if they were set
+[[ ${PETSC_DIR_BKUP+set}  == 'set' ]] && export PETSC_DIR=$PETSC_DIR_BKUP
+[[ ${PETSC_ARCH_BKUP+set} == 'set' ]] && export PETSC_ARCH=$PETSC_ARCH_BKUP
+[[ ${SLEPC_DIR_BKUP+set}  == 'set' ]] && export SLEPC_DIR=$SLEPC_DIR_BKUP
+[[ ${TAO_DIR_BKUP+set}    == 'set' ]] && export TAO_DIR=$TAO_DIR_BKUP
