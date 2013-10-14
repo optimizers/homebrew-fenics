@@ -5,6 +5,7 @@ class Ufc < Formula
   head 'https://bitbucket.org/fenics-project/ufc.git'
   version '2.2.0+'
 
+  depends_on 'swig'  => :build
   depends_on 'cmake' => :build
 
   def install
