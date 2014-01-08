@@ -56,3 +56,24 @@ wsgiref (0.1.2)
   and `suite-sparse`
 
 - for some reason `depends_on vtk5` does not install `sip` and `pyqt` which are dependencies
+
+- for dependencies:
+
+  - first MPI
+  - next mpi4py
+
+  - next parmetis
+  - next hdf5
+  
+  - next petsc
+  - next petsc4py
+
+  - next scotch
+  - next pastix
+
+  - next slepc
+  - next tao
+
+- where is armadillo used?
+
+- add sphinx, postgresql last

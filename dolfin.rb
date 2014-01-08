@@ -10,6 +10,7 @@ class Dolfin < Formula
 
   depends_on 'suite-sparse'
   depends_on 'eigen'
+  depends_on 'cgal' => :recommended
 
   depends_on 'cmake' => :build
   depends_on 'cppunit' => :build
