@@ -7,9 +7,10 @@ A simple script to build [FEniCS](http://fenicsproject.org) on OSX relying on [H
   ```
   ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
   ```
-2. Add the `homebrew/science` tap:
+2. Add the `homebrew/science` and versions (for `vtk5`) tap:
   ```
   brew tap homebrew/science
+  brew tap homebrew/versions
   ```
 3. Add this tap (**TODO change this**):
   ```
@@ -17,8 +18,8 @@ A simple script to build [FEniCS](http://fenicsproject.org) on OSX relying on [H
   ```
 3. Install the python from brew:
   ```
-  brew tap homebrew/science
   brew install python
+  brew linkapps
   ```
 4. Install `numpy` and `ply` with `pip`:
   ```
