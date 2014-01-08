@@ -7,15 +7,39 @@ class Dolfin < Formula
 
   depends_on :fortran
   depends_on :python
-  depends_on 'numpy' => :python
-  depends_on 'ply' =>:python
+
+  depends_on 'suite-sparse'
+  depends_on 'eigen'
+
   depends_on 'cmake' => :build
+  depends_on 'cppunit' => :build
   depends_on 'pkg-config' => :build
   depends_on 'swig' => :build
-  depends_on 'cppunit' => :build
-  depends_on 'boost' => ['--without-single']
 
-  #depends_on :mpi => [:cc, :cxx, :f90]
+  depends_on 'numpy' => :python
+  depends_on 'ply' =>:python
+
+  depends_on 'mpi' => :optional
+
+  depends_on 'vtk5' => ['with-qt', 'with-python']
+
+  if build.with? 'mpi'
+    depends_on :mpi => [:cc, :cxx, :f90]
+    depends_on 'boost' => ['--without-single', '--with-mpi']
+  else
+    depends_on 'boost' => ['--without-single']
+  end
+
+  if build.with? 'vtk5'
+    depends_on 'sip'
+    depends_on 'pyqt'
+  end
+  
+  depends_on 'ufc'
+  depends_on 'fiat'
+  depends_on 'ufl'
+  depends_on 'ffc'
+  depends_on 'instant'
 
   def install
     if ENV.compiler == :clang

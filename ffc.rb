@@ -7,9 +7,9 @@ class Ffc < Formula
 
   depends_on :python
   depends_on 'numpy' => :python
-  #depends_on 'ufc'
-  #depends_on 'fiat'
-  #depends_on 'ufl'
+  depends_on 'ufc'
+  depends_on 'fiat'
+  depends_on 'ufl'
 
   def install
     ENV.deparallelize
