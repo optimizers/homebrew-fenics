@@ -32,7 +32,6 @@ class Dolfin < Formula
   option 'with-plotting', 'add plotting'
 
   if build.with? 'plotting'
-    puts 'HERE'
     depends_on 'sip'
     depends_on 'pyqt'
     depends_on 'vtk5' => 'with-qt'
