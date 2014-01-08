@@ -19,9 +19,7 @@ class Dolfin < Formula
   depends_on 'numpy' => :python
   depends_on 'ply' =>:python
 
-  depends_on 'mpi' => :optional
-
-  depends_on 'vtk5' => ['with-qt', 'with-python']
+  depends_on :mpi => :optional
 
   if build.with? 'mpi'
     depends_on :mpi => [:cc, :cxx, :f90]
@@ -30,11 +28,15 @@ class Dolfin < Formula
     depends_on 'boost' => ['--without-single']
   end
 
-  if build.with? 'vtk5'
+  option 'with-plotting', 'add plotting'
+
+  if build.with? 'plotting'
+    puts 'HERE'
     depends_on 'sip'
     depends_on 'pyqt'
+    depends_on 'vtk5' => 'with-qt'
   end
-  
+
   depends_on 'ufc'
   depends_on 'fiat'
   depends_on 'ufl'
