@@ -8,10 +8,11 @@ A simple script to build [FEniCS](http://fenicsproject.org) on OSX relying on [H
   ```
   ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
   ```
-2. Add the `homebrew/science` and versions (for `vtk5`) tap:
+2. Add the science, python, and versions taps
   
   ```
   brew tap homebrew/science
+  brew tap homebrew/python
   brew tap homebrew/versions
   ```
 

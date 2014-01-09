@@ -20,18 +20,27 @@ class Dolfin < Formula
   depends_on 'numpy' => :python
   depends_on 'ply' =>:python
 
-  depends_on :mpi => :optional
+  depends_on :mpi => :recommended
 
-  if build.with? 'mpi'
+  if build.with? :mpi
     depends_on :mpi => [:cc, :cxx, :f90]
-    depends_on 'boost' => ['--without-single', '--with-mpi']
+    depends_on 'boost' => ['without-single', 'with-mpi']
+    depends_on 'parmetis' => :recommended
+    depends_on 'hdf5' => ['enable-parallel', :recommended]
+
+    depends_on 'mpi4py' => :python
+    resource('mpi4py') do
+      url 'https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-1.3.1.tar.gz'
+      sha1 '083a4a9b6793dfdbd852082d8b95da08bcf57290'
+    end
+
   else
     depends_on 'boost' => ['--without-single']
   end
 
-  option 'with-plotting', 'add plotting'
+  option 'without-plotting', 'do not add plotting'
 
-  if build.with? 'plotting'
+  unless build.without? 'plotting'
     depends_on 'sip'
     depends_on 'pyqt'
     depends_on 'vtk5' => 'with-qt'
@@ -58,6 +67,12 @@ class Dolfin < Formula
   def install
     if ENV.compiler == :clang
       opoo 'OpenMP support will not be enabled. Use --use-gcc if you require OpenMP.'
+    end
+
+    if build.with? :mpi
+      resourceargs = ['setup.py', 'install', "--prefix=#{prefix}"]
+
+      resource('mpi4py').stage {system 'python', *resourceargs }
     end
 
     ENV.deparallelize
