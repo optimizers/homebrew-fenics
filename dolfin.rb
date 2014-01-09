@@ -37,6 +37,18 @@ class Dolfin < Formula
     depends_on 'vtk5' => 'with-qt'
   end
 
+  #  depends_on 'armadillo' => :build
+  #  depends_on 'parmetis'  => :build
+  #  depends_on 'petsc'     => :build
+  #  depends_on 'slepc'     => :build
+  #  depends_on 'scotch'    => :build    # Must be Scotch >= 6
+  #  depends_on 'pastix'    => :build
+  #  depends_on 'tao'       => :build
+  #  depends_on 'trilinos'  => ['--with-boost', '--with-scotch']
+  #  depends_on 'mtl'       => :build
+  #  depends_on 'hdf5'      => 'enable-parallel'
+  #  depends_on 'sphinx'    => :build
+
   depends_on 'ufc'
   depends_on 'fiat'
   depends_on 'ufl'
