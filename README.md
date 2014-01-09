@@ -4,29 +4,39 @@ A simple script to build [FEniCS](http://fenicsproject.org) on OSX relying on [H
 
 
 1. Install [Homebrew](http://brew.sh):
+  
   ```
   ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
   ```
 2. Add the `homebrew/science` and versions (for `vtk5`) tap:
+  
   ```
   brew tap homebrew/science
   brew tap homebrew/versions
   ```
+
 3. Add this tap (**TODO change this**):
+  
   ```
   brew tap lukeolson/fenics-from-scratch
   ```
+
 3. Install the python from brew:
+
   ```
   brew install python
   brew linkapps
   ```
+
 4. Install `numpy` and `ply` with `pip`:
+
   ```
   pip install numpy
   pip install ply
   ```
+
 5. Now you can install `dolfin`:
+
   ```
   brew install dolfin
   ```
