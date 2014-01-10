@@ -29,7 +29,6 @@ class Dolfin < Formula
 
   depends_on 'parmetis' => :recommended if build.with? :mpi
   depends_on 'hdf5' => ['enable-parallel', :recommended] if build.with? :mpi
-
   depends_on 'boost' => ['without-single', 'with-mpi'] if build.with? :mpi
 
   if build.without? :mpi
@@ -51,13 +50,9 @@ class Dolfin < Formula
     end
   end
 
-  # depends_on 'tao' => :recommended if build.with? :mpi
-  # depends_on 'trilinos'  => ['--with-boost', '--with-scotch']
-  # depends_on 'mtl'       => :build
-
-  option 'without-plotting', 'do not add plotting'
-
-  unless build.without? 'plotting'
+  # vtk5 should grab these dependencies, but it doesn't.  thus this hack.
+  option 'without-vtk5', 'Build without vtk5 support'
+  unless build.without? 'vtk5'
     depends_on 'sip'
     depends_on 'pyqt'
     depends_on 'vtk5' => 'with-qt'

@@ -39,10 +39,40 @@ A simple script to build [FEniCS](http://fenicsproject.org) on OSX relying on [H
 5. Now you can install `dolfin`:
 
   ```
-  brew install dolfin
+  brew install dolfin --env=std --without-mpi
+  ```
+or with `mpi`
+  ```
+  brew install open-mpi petsc343 slepc343
+  brew install dolfine --env=std
   ```
 
-### To create a virtual environment
+## Some comments on `dolfin.rb.`
+
+There are several outstanding issues:
+
+- Relying on `depends_on slepc` to install `slepc` has path issues.
+
+- MPI works with `open-mpi`.  There are issues, possibly with Boost, with `mpich2`.
+
+- To build with `petsc`, `dolfin` install needs `--env=std`.  This indicates a path error with `superenv`.
+
+- Within the formula, `depends_on vtk5` does not install `sip` and `pyqt`, which are dependencies.  This is a bug with `vtk5`, thus the work-around here.
+
+- Currently `tao` does not work.  There is an issue with the installation of the `lib`.
+
+- The `PATH` should work with `dolfin`, but this is an option if it does not:
+```
+source /usr/local/Cellar/dolfin/1.3.0/share/dolfin/dolfin.conf
+```
+
+- Although `petsc4py` is installed, `dolfin` cannot find it.
+
+- With `sphinx` installed, `dolfin` cannot find it.
+
+- Currently, `trilinos` does not work.
+
+## To create a virtual environment
 
 1. Install virtualenv and virtualenvwrapper if you haven't already
     ```
