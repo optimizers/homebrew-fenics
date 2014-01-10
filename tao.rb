@@ -6,7 +6,7 @@ class Tao < Formula
   sha1 'ddd0b65ce568692527bc2de8e75cca5c10b1e749'
   version '2.2'
 
-  depends_on 'petsc' => :build
+  depends_on 'petsc343' => :build
 
   depends_on :mpi => [:cc, :cxx, :f90]
   depends_on :fortran
