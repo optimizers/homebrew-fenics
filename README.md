@@ -19,7 +19,7 @@ A simple script to build [FEniCS](http://fenicsproject.org) on OSX relying on [H
 3. Add this tap (**TODO change this**):
   
   ```
-  brew tap lukeolson/fenics-from-scratch
+  brew tap optimizers/<name-of-this-repo>
   ```
 
 3. Install the python from brew:
@@ -48,6 +48,44 @@ or with `mpi`
   ```
 
 ## Some comments on `dolfin.rb.`
+
+#### Included packages
+
+With everything included (nothing excluded with `--without`) the following should be produced (use the `-v` option to verify):
+```no-highlight
+-- The following optional packages were found:
+-- -------------------------------------------
+-- (OK) MPI
+-- (OK) PETSC
+-- (OK) SLEPC
+-- (OK) UMFPACK
+-- (OK) CHOLMOD
+-- (OK) PASTIX
+-- (OK) SCOTCH
+-- (OK) PARMETIS
+-- (OK) CGAL
+-- (OK) ZLIB
+-- (OK) PYTHON
+-- (OK) HDF5
+-- (OK) VTK
+-- (OK) QT
+-- 
+-- The following optional packages were not found:
+-- -----------------------------------------------
+-- (**) OPENMP
+-- (**) PETSC4PY
+-- (**) TAO
+-- (**) TRILINOS
+-- (**) SPHINX
+```
+#### Demos
+
+Demos are included here:
+```
+/usr/local/Cellar/dolfin/1.3.0/share/dolfin/demo
+```
+
+#### Issues
 
 There are several outstanding issues:
 
