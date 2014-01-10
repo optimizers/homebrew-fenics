@@ -18,11 +18,13 @@ class Dolfin < Formula
   depends_on 'swig' => :build
 
   depends_on 'numpy' => :python
-  depends_on 'ply' =>:python
+  depends_on 'ply' => :python
 
-  depends_on :mpi => :recommended
+  depends_on 'petsc343' => :optional
+  depends_on 'slepc343' => :optional
 
-  if build.with? :mpi
+  if build.with? :mpi or build.with? 'petsc343' or build.with? 'slepc343'
+
     depends_on :mpi => [:cc, :cxx, :f90]
     depends_on 'boost' => ['without-single', 'with-mpi']
     depends_on 'parmetis' => :recommended
@@ -47,15 +49,12 @@ class Dolfin < Formula
   end
 
   #  depends_on 'armadillo' => :build
-  #  depends_on 'parmetis'  => :build
-  #  depends_on 'petsc'     => :build
   #  depends_on 'slepc'     => :build
   #  depends_on 'scotch'    => :build    # Must be Scotch >= 6
   #  depends_on 'pastix'    => :build
   #  depends_on 'tao'       => :build
   #  depends_on 'trilinos'  => ['--with-boost', '--with-scotch']
   #  depends_on 'mtl'       => :build
-  #  depends_on 'hdf5'      => 'enable-parallel'
   #  depends_on 'sphinx'    => :build
 
   depends_on 'ufc'
@@ -76,16 +75,17 @@ class Dolfin < Formula
     end
 
     ENV.deparallelize
-    # ENV['PETSC_DIR'] = Formula.factory('petsc').prefix
-    # ENV['PETSC_ARCH'] = 'arch-darwin-c-opt'
+
+    ENV['PETSC_DIR'] = Formula.factory('petsc343').prefix
+    ENV['PETSC_ARCH'] = 'arch-darwin-c-opt'
+    ENV['SLEPC_DIR'] = Formula.factory('slepc343').prefix
+
     # ENV['SCOTCH_DIR'] = Formula.factory('scotch').prefix
     # ENV['PASTIX_DIR'] = Formula.factory('pastix').prefix
-    # ENV['SLEPC_DIR'] = '/usr/local/opt/slepc'
-    # ENV['PARMETIS_DIR'] = Formula.factory('parmetis').prefix
     # #ENV['TAO_DIR'] = Formula.factory('tao').prefix
     # ENV['CPPUNIT_DIR'] = Formula.factory('cppunit').prefix
+    # ENV['PARMETIS_DIR'] = Formula.factory('parmetis').prefix
     # ENV['CGAL_DIR'] = Formula.factory('cgal').prefix
-
     # This is necessary to discover CGAL.
     #ENV.append_to_cflags '-frounding-math'
 

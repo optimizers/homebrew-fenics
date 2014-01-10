@@ -42,24 +42,6 @@ A simple script to build [FEniCS](http://fenicsproject.org) on OSX relying on [H
   brew install dolfin
   ```
 
-## Some options:
-
-### To add plotting
-
-Turn on plotting with
-```
---with-plotting
-```
-This will build and install (very long) `sip`, `qt`, `pyqt`, and `vtk5`.
-
-### To use MPI
-
-Use MPI with 
-```
---with-mpi
-```
-This will require Boost with MPI among other things.
-
 ### To create a virtual environment
 
 1. Install virtualenv and virtualenvwrapper if you haven't already
