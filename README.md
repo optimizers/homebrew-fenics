@@ -43,7 +43,7 @@ A simple script to build [FEniCS](http://fenicsproject.org) on OSX relying on [H
   ```
 or with `mpi`
   ```
-  brew install open-mpi petsc343 slepc343
+  brew install open-mpi petsc slepc
   brew install dolfin --env=std
   ```
 

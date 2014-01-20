@@ -22,8 +22,8 @@ class Dolfin < Formula
 
   depends_on :mpi => [:cc, :cxx, :f90, :recommended]
 
-  depends_on 'petsc343' => :recommended if build.with? :mpi
-  depends_on 'slepc343' => :recommended if build.with? :mpi
+  depends_on 'petsc' => :recommended if build.with? :mpi
+  depends_on 'slepc' => :recommended if build.with? :mpi
   depends_on 'scotch' => :recommended if build.with? :mpi
   depends_on 'pastix' => :recommended if build.with? :mpi
 
@@ -43,7 +43,7 @@ class Dolfin < Formula
     end
   end
 
-  if build.with? 'petsc343'
+  if build.with? 'petsc'
     resource('petsc4py') do
       url 'https://bitbucket.org/petsc/petsc4py/downloads/petsc4py-3.4.tar.gz'
       sha1 'b81cf6e76dcb612b5e550a80085b9e08a8a318cf'
@@ -70,9 +70,9 @@ class Dolfin < Formula
     end
 
     ENV.deparallelize
-    ENV['PETSC_DIR'] = Formula.factory('petsc343').prefix
+    ENV['PETSC_DIR'] = Formula.factory('petsc').prefix
     ENV['PETSC_ARCH'] = 'arch-darwin-c-opt'
-    ENV['SLEPC_DIR'] = Formula.factory('slepc343').prefix
+    ENV['SLEPC_DIR'] = Formula.factory('slepc').prefix
 
     # ENV['SCOTCH_DIR'] = Formula.factory('scotch').prefix
     # ENV['PASTIX_DIR'] = Formula.factory('pastix').prefix
@@ -88,7 +88,7 @@ class Dolfin < Formula
 
       resource('mpi4py').stage {system 'python', *resourceargs }
 
-      if build.with? 'petsc343'
+      if build.with? 'petsc'
         resource('petsc4py').stage {system 'python', *resourceargs }
       end
     end
