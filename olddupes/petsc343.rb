@@ -18,6 +18,12 @@ class Petsc343 < Formula
     petsc_arch = 'arch-darwin-c-opt'
     args = ["--with-debugging=0", "--with-shared-libraries=1", "--prefix=#{prefix}/#{petsc_arch}"]
     args << "--with-x=0" if build.without? 'x11'
+    args << "--download-hypre"
+    args << "--download-metis"
+    args << "--download-parmetis"
+    args << "--download-mumps"
+    args << "--download-scalapack"
+    args << "--download-umfpack"
     ENV['PETSC_DIR'] = Dir.getwd  # configure fails if those vars are set differently.
     ENV['PETSC_ARCH'] = petsc_arch
     system "./configure", *args
