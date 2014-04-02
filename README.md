@@ -46,11 +46,11 @@ A simple script to build [FEniCS](http://fenicsproject.org) on OSX relying on [H
   pip install petsc4py
   ```
 
-note: if you've installed petsc (or tried to) before, then
+  note: if you've installed petsc (or tried to) before, then
   ```
   brew link petsc --overwrite
   ```
-may be necessary
+  may be necessary
 
 5. Now you can install `dolfin` (**TODO will change**):
   ```
