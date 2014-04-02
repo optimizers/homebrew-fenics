@@ -39,7 +39,6 @@ A simple script to build [FEniCS](http://fenicsproject.org) on OSX relying on [H
   ```
   brew install open-mpi 
   brew install lukeolson/fenics/petsc --env=std
-  brew install slepc
   pip install mpi4py
   export PETSC_DIR=/usr/local/Cellar/petsc/3.4.4
   export PETSC_ARCH=arch-darwin-c-opt
