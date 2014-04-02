@@ -24,15 +24,6 @@ class Petsc < Formula
     args << "--download-mumps"
     args << "--download-scalapack"
     args << "--download-umfpack"
-    #args << "--download-hypre"
-    #args << "--with-scalapack"
-    #args << "--with-scalapack-dir=/usr/local/Cellar/scalapack/2.0.2"
-    #args << "--with-mumps"
-    #args << "--with-mumps-dir=/usr/local/Cellar/mumps/4.10.0"
-    #args << "--with-parmetis"
-    #args << "--with-parmetis-dir=/usr/local/Cellar/parmetis/4.0.3"
-    #args << "--with-metis"
-    #args << "--with-metis-dir=/usr/local/Cellar/metis/5.1.0"
     ENV['PETSC_DIR'] = Dir.getwd  # configure fails if those vars are set differently.
     ENV['PETSC_ARCH'] = petsc_arch
     system "./configure", *args

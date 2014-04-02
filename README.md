@@ -16,7 +16,7 @@ A simple script to build [FEniCS](http://fenicsproject.org) on OSX relying on [H
   brew tap homebrew/versions
   ```
 
-3. Add this tap (**TODO change this**):
+3. Add this tap (**TODO will change**):
   
   ```
   brew tap lukeolson/fenics
@@ -35,25 +35,18 @@ A simple script to build [FEniCS](http://fenicsproject.org) on OSX relying on [H
   pip install numpy
   pip install ply
   ```
-5. Install `petsc` and other packages:
+5. Install `mpi` and `petsc` and other packages:
   ```
-  brew install metis parmetis mumps
-  brew install scalapack --with-openblas --without-check
-  brew install suite-sparse
-  ```
-
-5. Now you can install `dolfin`:
-
-  ```
-  brew install dolfin --env=std --without-mpi
-  ```
-or with `mpi`
-  ```
-  brew install open-mpi petsc slepc
+  brew install open-mpi 
+  brew install lukeolson/fenics/petsc
+  brew install slepc
   pip install mpi4py
   export PETSC_DIR=/usr/local/Cellar/petsc/3.4.4
   export PETSC_ARCH=arch-darwin-c-opt
   pip install petsc4py
+  ```
+
+5. Now you can install `dolfin` (**TODO will change**):
   brew install dolfin --env=std
   ```
 
@@ -79,11 +72,11 @@ With everything included (nothing excluded with `--without`) the following shoul
 -- (OK) HDF5
 -- (OK) VTK
 -- (OK) QT
+-- (OK) PETSC4PY
 -- 
 -- The following optional packages were not found:
 -- -----------------------------------------------
 -- (**) OPENMP
--- (**) PETSC4PY
 -- (**) TAO
 -- (**) TRILINOS
 -- (**) SPHINX
