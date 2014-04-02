@@ -47,6 +47,7 @@ A simple script to build [FEniCS](http://fenicsproject.org) on OSX relying on [H
   ```
 
 5. Now you can install `dolfin` (**TODO will change**):
+  ```
   brew install dolfin --env=std
   ```
 
@@ -106,8 +107,6 @@ There are several outstanding issues:
 ```
 source /usr/local/Cellar/dolfin/1.3.0/share/dolfin/dolfin.conf
 ```
-
-- Although `petsc4py` is installed, `dolfin` cannot find it.
 
 - With `sphinx` installed, `dolfin` cannot find it.
 
