@@ -2,8 +2,11 @@ require 'formula'
 
 class Petsc < Formula
   homepage 'http://www.mcs.anl.gov/petsc/index.html'
-  url 'http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-lite-3.4.2.tar.gz'
-  sha1 '39e7ff2715a0c6b24be6f822eec6870f3a2c60da'
+  url 'http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-lite-3.4.4.tar.gz'
+  sha1 '2f507195a3142eb0599e78a909446175a597480a'
+  head 'https://bitbucket.org/petsc/petsc', :using => :git
+
+  option 'without-check', 'Skip build-time tests (not recommended)'
 
   depends_on :mpi => :cc
   depends_on :fortran
@@ -14,15 +17,18 @@ class Petsc < Formula
 
     petsc_arch = 'arch-darwin-c-opt'
     args = ["--with-debugging=0", "--with-shared-libraries=1", "--prefix=#{prefix}/#{petsc_arch}"]
-    if build.without? 'x11'
-      args << "--with-x=0"
-    end
+    args << "--with-x=0" if build.without? 'x11'
+    args << "--download-hypre"
+    args << "--download-metis"
+    args << "--download-parmetis"
+    args << "--download-mumps"
+    args << "--download-scalapack"
+    args << "--download-umfpack"
     ENV['PETSC_DIR'] = Dir.getwd  # configure fails if those vars are set differently.
     ENV['PETSC_ARCH'] = petsc_arch
     system "./configure", *args
     system "make all"
-    system "make test"
-    ohai 'Test results are in ~/Library/Logs/Homebrew/petsc. Please check.'
+    system "make test" if build.with? "check"
     system "make install"
 
     # Link only what we want.
