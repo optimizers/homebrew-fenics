@@ -34,15 +34,15 @@ class Dolfin < Formula
     depends_on 'boost' => ['--without-single']
   end
 
+  depends_on 'vtk6'
   # vtk5 should grab these dependencies, but it doesn't.  thus this hack.
-  option 'without-vtk5', 'Build without vtk5 support'
-  unless build.without? 'vtk5'
-    depends_on 'sip'
-    depends_on 'pyqt'
-    depends_on 'vtk5' => 'with-qt'
-  end
+  # option 'without-vtk5', 'Build without vtk5 support'
+  # unless build.without? 'vtk5'
+  #   depends_on 'sip'
+  #   depends_on 'pyqt'
+  #   depends_on 'vtk5' => 'with-qt'
+  # end
 
-  depends_on 'ufc'
   depends_on 'fiat'
   depends_on 'ufl'
   depends_on 'ffc'
