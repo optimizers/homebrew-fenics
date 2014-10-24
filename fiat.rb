@@ -2,8 +2,8 @@ require 'formula'
 
 class Fiat < Formula
   homepage 'https://bitbucket.org/fenics-project/fiat'
-  url 'https://bitbucket.org/fenics-project/fiat/downloads/fiat-1.3.0.tar.gz'
-  sha1 '65a0d51df1b236763f20c6e8c1af1f4d273b82ad'
+  url 'https://bitbucket.org/fenics-project/fiat/downloads/fiat-1.4.0.tar.gz'
+  sha1 'ea77559760ec862353c5d2a9d31d471294471a9f'
 
   depends_on :python
   depends_on 'numpy' => :python

@@ -34,7 +34,7 @@ class Dolfin < Formula
     depends_on 'boost' => ['--without-single']
   end
 
-  depends_on 'vtk6'
+  depends_on 'vtk' => ['--with-qt']
   # vtk5 should grab these dependencies, but it doesn't.  thus this hack.
   # option 'without-vtk5', 'Build without vtk5 support'
   # unless build.without? 'vtk5'
@@ -56,16 +56,18 @@ class Dolfin < Formula
     ENV.deparallelize
     ENV['PETSC_DIR'] = Formula.factory('petsc').prefix
     ENV['PETSC_ARCH'] = 'arch-darwin-c-opt'
-    ENV['SLEPC_DIR'] = Formula.factory('slepc').prefix
-    ENV['PARMETIS_DIR'] = Formula.factory('parmetis').prefix
+    ENV['PARMETIS_DIR'] = Formula['parmetis'].prefix
+    ENV['AMD_DIR'] = Formula['suite-sparse'].prefix
+    ENV['CHOLMOD_DIR'] = Formula['suite-sparse'].prefix
+    ENV['UMFPACK_DIR'] = Formula['suite-sparse'].prefix
 
+    # ENV['SLEPC_DIR'] = Formula.factory('slepc').prefix
+    # ENV['TAO_DIR'] = Formula['tao'].prefix
     # ENV['SCOTCH_DIR'] = Formula.factory('scotch').prefix
     # ENV['PASTIX_DIR'] = Formula.factory('pastix').prefix
     # #ENV['TAO_DIR'] = Formula.factory('tao').prefix
     # ENV['CPPUNIT_DIR'] = Formula.factory('cppunit').prefix
-    # ENV['CGAL_DIR'] = Formula.factory('cgal').prefix
-    # This is necessary to discover CGAL.
-    #ENV.append_to_cflags '-frounding-math'
+    # ENV.append_to_cflags '-frounding-math'
 
     mkdir 'build' do
       system 'cmake', '..', *std_cmake_args
