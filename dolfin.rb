@@ -2,7 +2,7 @@ require 'formula'
 
 class Dolfin < Formula
   homepage 'https://bitbucket.org/fenics-project/dolfin'
-  url 'https://bitbucket.org/fenics-project/dolfin/downloads/dolfin-1.3.0.tar.gz'
+  url 'https://bitbucket.org/fenics-project/dolfin/downloads/dolfin-1.4.0.tar.gz'
   sha1 'af1a3fe0798df54a563fe0e616a3da08f0c5e6fa'
 
   depends_on :fortran
@@ -10,7 +10,6 @@ class Dolfin < Formula
 
   depends_on 'suite-sparse'
   depends_on 'eigen'
-  depends_on 'cgal' => :recommended
 
   depends_on 'cmake' => :build
   depends_on 'cppunit' => :build
