@@ -3,7 +3,7 @@ require 'formula'
 class Dolfin < Formula
   homepage 'https://bitbucket.org/fenics-project/dolfin'
   url 'https://bitbucket.org/fenics-project/dolfin/downloads/dolfin-1.4.0.tar.gz'
-  sha1 'af1a3fe0798df54a563fe0e616a3da08f0c5e6fa'
+  sha1 'b58cb5e4aaef0825ded1237ba6012d7aee63c152'
 
   depends_on :fortran
   depends_on :python

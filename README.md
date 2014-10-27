@@ -4,22 +4,21 @@ A simple script to build [FEniCS](http://fenicsproject.org) on OSX relying on [H
 
 
 1. Install [Homebrew](http://brew.sh):
-  
+
   ```
   ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
   ```
 2. Add the science, python, and versions taps
-  
+
   ```
   brew tap homebrew/science
   brew tap homebrew/python
-  brew tap homebrew/versions
   ```
 
 3. Add this tap:
-  
+
   ```
-  brew tap optimizers/fenics
+  brew tap optimizers/homebrew-fenics
   ```
 
 3. Install the python from brew:
@@ -79,7 +78,7 @@ With everything included (nothing excluded with `--without`) the following shoul
 -- (OK) VTK
 -- (OK) QT
 -- (OK) PETSC4PY
--- 
+--
 -- The following optional packages were not found:
 -- -----------------------------------------------
 -- (**) OPENMP

@@ -9,9 +9,24 @@ class Ffc < Formula
   depends_on 'fiat'
   depends_on 'ufl'
 
+  patch :DATA
+
   def install
     ENV.deparallelize
 
     system 'python', 'setup.py', 'install', "--prefix=#{prefix}"
   end
 end
+
+__END__
+--- a/setup.py
++++ b/setup.py
+@@ -51,7 +51,7 @@
+     # Find SWIG executable
+     swig_executable = None
+     for executable in ["swig", "swig2.0"]:
+-        swig_executable = spawn.find_executable(executable)
++        swig_executable = spawn.find_executable(executable, path='/usr/local/bin')
+         if swig_executable is not None:
+             break
+     if swig_executable is None:

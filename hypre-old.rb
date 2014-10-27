@@ -1,6 +1,6 @@
 require "formula"
 
-class Hypre < Formula
+class HypreOld < Formula
   homepage "http://computation.llnl.gov/casc/hypre"
   url "https://computation.llnl.gov/casc/hypre/download/hypre-2.9.1a.tar.gz"
   sha1 "62f6beb8e28046a6a8f2afcbe286f64afcf79aa5"
