@@ -1,6 +1,6 @@
 require 'formula'
 
-class Petsc < Formula
+class PetscFenics < Formula
   homepage 'http://www.mcs.anl.gov/petsc/index.html'
   url 'http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-lite-3.4.4.tar.gz'
   sha1 '2f507195a3142eb0599e78a909446175a597480a'
@@ -9,6 +9,7 @@ class Petsc < Formula
   option 'without-check', 'Skip build-time tests (not recommended)'
 
   depends_on :mpi => :cc
+  depends_on 'cmake' => :build
   depends_on :fortran
   depends_on :x11 => MacOS::X11.installed? ? :recommended : :optional
 
