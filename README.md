@@ -33,13 +33,16 @@ A simple script to build [FEniCS](http://fenicsproject.org) on OSX relying on [H
   ```
   pip install numpy
   pip install ply
-  pip install pyqt
-  pip install sip
+  ```
+  And now `pyqt` and `sip` with HB:
+  ```
+  brew install pyqt
+  brew install sip
   ```
 5. Install `mpi` and `petsc` and other packages:
   ```
   brew install open-mpi
-  brew install optimizers/fenics/petsc --env=std
+  brew install optimizers/fenics/petsc-fenics --env=std
   pip install mpi4py
   export PETSC_DIR==`brew --prefix petsc`
   export PETSC_ARCH=arch-darwin-c-opt
