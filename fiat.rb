@@ -1,24 +1,41 @@
-require 'formula'
-
 class Fiat < Formula
-  homepage 'https://bitbucket.org/fenics-project/fiat'
-  url 'https://bitbucket.org/fenics-project/fiat/downloads/fiat-1.4.0.tar.gz'
-  sha1 'ea77559760ec862353c5d2a9d31d471294471a9f'
+  desc "FInite element Automatic Tabulator"
+  homepage "https://bitbucket.org/fenics-project/fiat"
+  url "https://bitbucket.org/fenics-project/fiat/downloads/fiat-1.6.0.tar.gz"
+  sha256 "858ea3e936ad3b3558b474ffccae8a7b9dddbaafeac77e307115b23753cb1cac"
+  head "https://bitbucket.org/fenics-project/fiat.git"
 
-  depends_on :python
-  depends_on 'numpy' => :python
+  depends_on :python if MacOS.version <= :snow_leopard
+  depends_on "numpy" => :python
 
-  resource('scientificpython') do
-    url 'https://sourcesup.renater.fr/frs/download.php/4153/ScientificPython-2.9.2.tar.gz'
-    sha1 '387b0ed5600b0f08301412745aab2da72e1459d7'
+  resource "sympy" do
+    url "https://github.com/sympy/sympy/releases/download/sympy-0.7.6.1/sympy-0.7.6.1.tar.gz"
+    sha256 "1fc272b51091aabe7d07f1bf9f0a47f3e28657fb2bec52bf3ef0e8f159f5f564"
+  end
+
+  def pyver
+    IO.popen("python -c 'import sys; print sys.version[:3]'").read.strip
   end
 
   def install
     ENV.deparallelize
 
-    resourceargs = ['setup.py', 'install', "--prefix=#{prefix}"]
-    resource('scientificpython').stage {system 'python', *resourceargs }
+    sympy_path = libexec/"sympy/lib/python#{pyver}/site-packages"
+    sympy_path.mkpath
+    ENV.prepend_create_path "PYTHONPATH", sympy_path
 
-    system 'python', 'setup.py', 'install', "--prefix=#{prefix}"
+    resource("sympy").stage do
+      system "python", *Language::Python.setup_install_args(libexec/"sympy")
+    end
+
+    dest_path = lib/"python#{pyver}/site-packages"
+    dest_path.mkpath
+    (dest_path/"optimizers-fiat-sympy.pth").write "#{sympy_path}\n"
+
+    system "python", *Language::Python.setup_install_args(prefix)
+    cd "test" do
+      ENV.prepend "PYTHONPATH", lib/"python#{pyver}/site-packages"
+      system "python", "test.py"
+    end
   end
 end
