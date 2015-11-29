@@ -1,0 +1,57 @@
+language: ruby
+rvm: system
+sudo: required
+services: docker
+os: linux
+
+matrix:
+  include:
+    - env: OSX=10.11
+      os: osx
+      osx_image: osx10.11
+      rvm: system
+    - env: OSX=10.10
+      os: osx
+      osx_image: xcode7
+      rvm: system
+    - env: OSX=10.9
+      os: osx
+      osx_image: beta-xcode6.2
+      rvm: system
+  allow_failures:
+    - os: linux
+
+before_install:
+  - if [ -f ".git/shallow" ]; then travis_retry git fetch --unshallow; fi
+  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
+      sudo chown -R $USER $(brew --repo);
+      brew tap homebrew/python;
+      brew update;
+      ln -s $PWD $(brew --repo)/Library/Taps/optimizers/homebrew-fenics;
+      cd $(brew --repo)/Library/Taps/optimizers/homebrew-fenics;
+      export TRAVIS_BUILD_DIR="$(brew --repo)/Library/Taps/optimizers/homebrew-fenics";
+    fi
+  - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then
+      docker pull sjackman/linuxbrew-standalone;
+      docker run
+        -v $(pwd):/home/linuxbrew/homebrew-fenics
+        sjackman/linuxbrew-standalone
+        /bin/sh -c 'brew tap homebrew/python && brew update && mkdir -p $(brew --repo)/Library/Taps/optimizers && cp -rf ~/homebrew-fenics $(brew --repo)/Library/Taps/optimizers/homebrew-fenics';
+      docker commit $(docker ps -l -q) linuxbrew;
+    fi
+  - env | grep TRAVIS | tee /tmp/travis.env
+
+script:
+  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
+      brew test-bot --tap=optimizers/fenics;
+    else
+      docker run
+        -w /home/linuxbrew/.linuxbrew/Library/Taps/optimizers/homebrew-fenics
+        --env-file /tmp/travis.env
+        -t
+        linuxbrew
+        brew test-bot --tap=optimizers/fenics;
+    fi
+
+notifications:
+  email: never
