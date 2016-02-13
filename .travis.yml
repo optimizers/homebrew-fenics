@@ -25,7 +25,6 @@ before_install:
   - if [ -f ".git/shallow" ]; then travis_retry git fetch --unshallow; fi
   - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
       sudo chown -R $USER $(brew --repo);
-      brew tap homebrew/python;
       brew update;
       mkdir -p $(brew --repo)/Library/Taps/optimizers;
       ln -s $PWD $(brew --repo)/Library/Taps/optimizers/homebrew-fenics;
@@ -38,7 +37,7 @@ before_install:
       docker run
         -v $(pwd):/home/linuxbrew/homebrew-fenics
         sjackman/linuxbrew-standalone
-        /bin/sh -c 'brew tap homebrew/python && brew update && mkdir -p $(brew --repo)/Library/Taps/optimizers && cp -rf ~/homebrew-fenics $(brew --repo)/Library/Taps/optimizers/homebrew-fenics && brew tap repair';
+        /bin/sh -c 'brew update && mkdir -p $(brew --repo)/Library/Taps/optimizers && cp -rf ~/homebrew-fenics $(brew --repo)/Library/Taps/optimizers/homebrew-fenics && brew tap repair';
       docker commit $(docker ps -l -q) linuxbrew;
     fi
   - env | grep TRAVIS | tee /tmp/travis.env
