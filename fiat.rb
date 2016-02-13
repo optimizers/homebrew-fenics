@@ -19,22 +19,19 @@ class Fiat < Formula
 
   def install
     ENV.deparallelize
-
-    sympy_path = libexec/"sympy/lib/python#{pyver}/site-packages"
-    sympy_path.mkpath
-    ENV.prepend_create_path "PYTHONPATH", sympy_path
+    ENV.prepend_create_path "PYTHONPATH", libexec/"vendor/lib/python#{pyver}/site-packages"
 
     resource("sympy").stage do
-      system "python", *Language::Python.setup_install_args(libexec/"sympy")
+      system "python", *Language::Python.setup_install_args(libexec/"vendor")
     end
 
-    dest_path = lib/"python#{pyver}/site-packages"
-    dest_path.mkpath
-    (dest_path/"optimizers-fiat-sympy.pth").write "#{sympy_path}\n"
-
+    ENV.prepend "PYTHONPATH", lib/"python#{pyver}/site-packages"
     system "python", *Language::Python.setup_install_args(prefix)
-    cd "test" do
-      ENV.prepend "PYTHONPATH", lib/"python#{pyver}/site-packages"
+    pkgshare.install "test"
+  end
+
+  test do
+    cd pkgshare/"test" do
       system "python", "test.py"
     end
   end

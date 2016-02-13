@@ -8,8 +8,13 @@ class Ufl < Formula
   depends_on :python if MacOS.version <= :snow_leopard
   depends_on "numpy" => :python
 
+  def pyver
+    IO.popen("python -c 'import sys; print sys.version[:3]'").read.strip
+  end
+
   def install
     ENV.deparallelize
+    ENV.prepend_create_path "PYTHONPATH", lib/"python#{pyver}/site-packages"
     system "python", *Language::Python.setup_install_args(prefix)
     pkgshare.install "demo"
   end

@@ -9,8 +9,13 @@ class Instant < Formula
   depends_on "swig" => :build
   depends_on "numpy" => :python
 
+  def pyver
+    IO.popen("python -c 'import sys; print sys.version[:3]'").read.strip
+  end
+
   def install
     ENV.deparallelize
+    ENV.prepend_create_path "PYTHONPATH", lib/"python#{pyver}/site-packages"
     system "python", *Language::Python.setup_install_args(prefix)
 
     # Tests that require numpy.i just won't compile at this point.

@@ -17,46 +17,28 @@ class Ffc < Formula
     sha256 "105f8d68616f8248e24bf0e9372ef04d3cc10104f1980f54d57b2ce73a5ad56a"
   end
 
-  # patch :DATA
-
   def pyver
     IO.popen("python -c 'import sys; print sys.version[:3]'").read.strip
   end
 
   def install
     ENV.deparallelize
-
-    six_path = libexec/"six/lib/python#{pyver}/site-packages"
-    six_path.mkpath
-    ENV.prepend_create_path "PYTHONPATH", six_path
+    ENV.prepend_create_path "PYTHONPATH", libexec/"vendor/lib/python#{pyver}/site-packages"
 
     resource("six").stage do
-      system "python", *Language::Python.setup_install_args(libexec/"six")
+      system "python", *Language::Python.setup_install_args(libexec/"vendor")
     end
-    
-    dest_path = lib/"python#{pyver}/site-packages"
-    dest_path.mkpath
-    (dest_path/"homebrew-ffc-six.pth").write "#{six_path}\n"
 
+    ENV.prepend_create_path "PYTHONPATH", lib/"python#{pyver}/site-packages"
     system "python", *Language::Python.setup_install_args(prefix)
 
+    pkgshare.install "test"
+  end
+
+  test do
     # Two tests fail. Not sure why.
-    # cd "test" do
-    #   ENV.prepend "PYTHONPATH", lib/"python#{pyver}/site-packages"
-    #   system "python", "test.py"
-    # end
+    cd pkgshare/"test" do
+      system "python", "test.py"
+    end
   end
 end
-
-__END__
---- a/setup.py
-+++ b/setup.py
-@@ -51,7 +51,7 @@
-     # Find SWIG executable
-     swig_executable = None
-     for executable in ["swig", "swig2.0"]:
--        swig_executable = spawn.find_executable(executable)
-+        swig_executable = spawn.find_executable(executable, path="/usr/local/bin")
-         if swig_executable is not None:
-             break
-     if swig_executable is None:
