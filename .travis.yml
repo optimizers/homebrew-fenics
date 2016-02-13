@@ -25,19 +25,25 @@ before_install:
   - if [ -f ".git/shallow" ]; then travis_retry git fetch --unshallow; fi
   - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
       sudo chown -R $USER $(brew --repo);
+      brew untap caskroom/cask;
+      brew tap homebrew/science;
       brew update;
       mkdir -p $(brew --repo)/Library/Taps/optimizers;
       ln -s $PWD $(brew --repo)/Library/Taps/optimizers/homebrew-fenics;
       cd $(brew --repo)/Library/Taps/optimizers/homebrew-fenics;
       brew tap --repair;
       export TRAVIS_BUILD_DIR="$(brew --repo)/Library/Taps/optimizers/homebrew-fenics";
+      brew install slepc;
+      sudo easy_install pip;
+      pip install ply;
+      PETSC_DIR=$(brew --repo)/opt/petsc/real SLEPC_DIR=$(brew --repo)/opt/slepc/real pip install mpi4py petsc4py slepc4py;
     fi
   - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then
       docker pull sjackman/linuxbrew-standalone;
       docker run
         -v $(pwd):/home/linuxbrew/homebrew-fenics
         sjackman/linuxbrew-standalone
-        /bin/sh -c 'brew update && mkdir -p $(brew --repo)/Library/Taps/optimizers && cp -rf ~/homebrew-fenics $(brew --repo)/Library/Taps/optimizers/homebrew-fenics && brew tap repair';
+        /bin/sh -c 'brew untap caskroom/cask && brew update && mkdir -p $(brew --repo)/Library/Taps/optimizers && cp -rf ~/homebrew-fenics $(brew --repo)/Library/Taps/optimizers/homebrew-fenics && brew tap repair';
       docker commit $(docker ps -l -q) linuxbrew;
     fi
   - env | grep TRAVIS | tee /tmp/travis.env
