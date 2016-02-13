@@ -5,6 +5,9 @@ class Dolfin < Formula
   sha256 "67eaac5fece6e71da0559b4ca8423156f9e99a952f0620adae449ebebb6695d1"
   head "https://bitbucket.org/fenics-project/dolfin.git"
 
+  option "with-openmp", "Build with an Open-MP-enabled compiler"
+  needs :openmp if build.with? "openmp"
+
   depends_on :python if MacOS.version <= :snow_leopard
   depends_on :fortran
   depends_on :mpi => [:cc, :cxx, :f90, :recommended]
@@ -19,8 +22,11 @@ class Dolfin < Formula
   depends_on "homebrew/science/vtk" => ["--with-qt"]
 
   # MPI, PETSc and SLEPc must be installed before installing mpi4py, petsc4py and slepc4py
-  depends_on "homebrew/python/numpy" => :python
-  depends_on "ply" => :python
+  depends_on "mpi4py"   => :python
+  depends_on "numpy"    => :python
+  depends_on "petsc4py" => :python
+  depends_on "ply"      => :python
+  depends_on "slepc4py" => :python
 
   boost_deps = ["without-single"] + ((build.with? "mpi") ? ["with-mpi"] : [])
   depends_on "boost"    => boost_deps
@@ -41,9 +47,6 @@ class Dolfin < Formula
   depends_on "optimizers/fenics/ufl"
   depends_on "optimizers/fenics/ffc"
   depends_on "optimizers/fenics/instant"
-
-  option "with-openmp"
-  needs :openmp if build.with? "openmp"
 
   env :std # To properly detect PARMETIS.
 
@@ -91,7 +94,7 @@ class Dolfin < Formula
   end
 
   def caveats; <<-EOS
-    do not source dolfin.conf, as the DYLIB settings conflict with Homebrew.
+    Do not source dolfin.conf, as the DYLIB settings conflict with Homebrew.
     EOS
   end
 end
