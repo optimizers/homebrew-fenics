@@ -15,26 +15,27 @@ class Dolfin < Formula
   depends_on "swig"       => :build
 
   depends_on "eigen"
-  depends_on "suite-sparse"
-  depends_on "vtk"      => ["--with-qt"]
+  depends_on "homebrew/science/suite-sparse"
+  depends_on "homebrew/science/vtk" => ["--with-qt"]
 
-  depends_on "numpy" => :python
-  depends_on "ply"   => :python
+  # MPI, PETSc and SLEPc must be installed before installing mpi4py, petsc4py and slepc4py
+  depends_on "homebrew/python/numpy" => :python
+  depends_on "ply" => :python
 
   boost_deps = ["without-single"] + ((build.with? "mpi") ? ["with-mpi"] : [])
   depends_on "boost"    => boost_deps
 
   hdf5_deps = [:recommended] + ((build.with? "mpi") ? ["with-mpi"] : [])
-  depends_on "hdf5"     => hdf5_deps
+  depends_on "homebrew/science/hdf5"     => hdf5_deps
 
-  depends_on "parmetis" => :recommended if build.with? "mpi"
-  depends_on "pastix"   => :recommended if build.with? "mpi"
-  depends_on "petsc"    => :recommended if build.with? "mpi"
-  depends_on "slepc"    => :recommended if build.with? "mpi"
-  depends_on "scotch"   => :recommended if build.with? "mpi"
+  depends_on "homebrew/science/parmetis" => :recommended if build.with? "mpi"
+  depends_on "homebrew/science/pastix"   => :recommended if build.with? "mpi"
+  depends_on "homebrew/science/petsc"    => :recommended if build.with? "mpi"
+  depends_on "homebrew/science/slepc"    => :recommended if build.with? "mpi"
+  depends_on "homebrew/science/scotch"   => :recommended if build.with? "mpi"
 
   trilinos_deps = [:recommended] + ((build.with? "mpi") ? [] : ["without-mpi"])
-  depends_on "trilinos" => trilinos_deps
+  depends_on "homebrew/science/trilinos" => trilinos_deps
 
   depends_on "optimizers/fenics/fiat"
   depends_on "optimizers/fenics/ufl"
