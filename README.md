@@ -14,12 +14,14 @@ If you are using Linux, try [Linuxbrew](http://linuxbrew.sh):
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/linuxbrew/go/install)"
 ```
 
-Then add the science, python and FEniCS taps
+## Add the Science and FEniCS taps
+
 ```bash
 brew tap homebrew/science
-brew tap homebrew/python
 brew tap optimizers/homebrew-fenics
 ```
+
+## Prepare Python
 
 Either install `pip` for use with system Python using
 ```bash
@@ -53,21 +55,23 @@ workon fenics
 
 ## Install the Python dependencies
 
-The Python dependencies require `mpi`, `petsc` and `slepc` already installed:
+The Python dependencies require a flavor of MPI, `petsc` and `slepc` already installed:
 ```bash
-brew install mpi
-brew install slepc  # will install petsc
+brew install slepc
 ```
+The command above will install `open-mpi` unless a flavor of MPI is already installed (either `open-mpi` or `mpich`), as well as `petsc`.
 
 The virtual environment is a good place to install the Python dependencies without interfering with your system folders.
 ```
+pip install ply
 PETSC_DIR=/usr/local/opt/petsc/real SLEPC_DIR=/usr/local/opt/slepc/real pip install mpi4py petsc4py slepc4py
 ```
 
-3. Install `dolfin`:
-  ```
-  brew install dolfin
-  ```
+## Install `dolfin`
+
+```
+brew install dolfin
+```
 
 #### Included packages
 
@@ -82,6 +86,8 @@ With everything included (nothing excluded with `--without`) the following shoul
 -- (OK) SLEPC
 -- (OK) SLEPC4PY
 -- (OK) TRILINOS
+-- (OK) UMFPACK
+-- (OK) CHOLMOD
 -- (OK) PASTIX
 -- (OK) SCOTCH
 -- (OK) PARMETIS
@@ -95,11 +101,6 @@ With everything included (nothing excluded with `--without`) the following shoul
 -- The following optional packages were not enabled:
 -- -------------------------------------------------
 -- (--) OPENMP
---
--- The following optional packages were not found:
--- -----------------------------------------------
--- (**) UMFPACK
--- (**) CHOLMOD
 ```
 
 #### Demos
