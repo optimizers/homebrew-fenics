@@ -36,8 +36,8 @@ class Ffc < Formula
   end
 
   test do
-    # Two tests fail. Not sure why.
-    cd pkgshare/"test" do
+    cp_r pkgshare/"test", testpath
+    cd "test" do
       system "python", "test.py"
     end
   end

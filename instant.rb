@@ -24,7 +24,7 @@ class Instant < Formula
 
   test do
     cp_r opt_pkgshare/"test", testpath
-    cd testpath/"test" do
+    cd "test" do
       system "python", "run_tests.py"
     end
   end

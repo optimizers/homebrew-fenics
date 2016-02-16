@@ -31,7 +31,8 @@ class Fiat < Formula
   end
 
   test do
-    cd pkgshare/"test" do
+    cp_r pkgshare/"test", testpath
+    cd "test" do
       system "python", "test.py"
     end
   end
