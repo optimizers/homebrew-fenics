@@ -105,7 +105,13 @@ With everything included (nothing excluded with `--without`) the following shoul
 
 #### Demos
 
-Demos are included here:
+Demos can be found under
 ```
 /usr/local/opt/dolfin/share/dolfin/demo
 ```
+
+## Troubleshooting
+
+##### `Fatal Python error: PyThreadState_Get: no current thread`
+
+You are mixing two Python interpreters. For instance, your virtual environment uses a different Python interpreter than the one used to build the dependencies. See the [Homebrew recommendations](https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Common-Issues.md#python-segmentation-fault-11-on-import-some_python_module).
