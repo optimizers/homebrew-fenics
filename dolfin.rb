@@ -40,7 +40,7 @@ class Dolfin < Formula
   depends_on "homebrew/science/slepc"    => :recommended if build.with? "mpi"
   depends_on "homebrew/science/scotch"   => :recommended if build.with? "mpi"
 
-  trilinos_deps = [:recommended] + ((build.with? "mpi") ? [] : ["without-mpi"])
+  trilinos_deps = [:optional] + ((build.with? "mpi") ? [] : ["without-mpi"])
   depends_on "homebrew/science/trilinos" => trilinos_deps
 
   depends_on "optimizers/fenics/fiat"
@@ -56,16 +56,16 @@ class Dolfin < Formula
 
   def install
     ENV.deparallelize
-    cmake_args = %W[-DCMAKE_INSTALL_PREFIX=#{prefix},
-                    -DBUILD_SHARED_LIBS:BOOL=ON,
-                    -DDOLFIN_ENABLE_PYTHON:BOOL=ON,
-                    -DDOLFIN_INSTALL_PYTHON_MODULE_DIR=#{lib}/python2.7/site-packages,
-                    -DDOLFIN_INSTALL_PYTHON_PURE_MODULE_DIR=#{lib}/python2.7/site-packages,
-                    -DDOLFIN_ENABLE_UMFPACK:BOOL=ON,
-                    -DUMFPACK_INCLUDE_DIRS=#{Formula["suite-sparse"].opt_include},
-                    -DDOLFIN_ENABLE_VTK:BOOL=ON,
-                    -DDOLFIN_ENABLE_CHOLMOD:BOOL=ON,
-                    -DCHOLMOD_INCLUDE_DIRS=#{Formula["suite-sparse"].opt_include},
+    cmake_args = %W[-DCMAKE_INSTALL_PREFIX=#{prefix}
+                    -DBUILD_SHARED_LIBS:BOOL=ON
+                    -DDOLFIN_ENABLE_PYTHON:BOOL=ON
+                    -DDOLFIN_INSTALL_PYTHON_MODULE_DIR=#{lib}/python2.7/site-packages
+                    -DDOLFIN_INSTALL_PYTHON_PURE_MODULE_DIR=#{lib}/python2.7/site-packages
+                    -DDOLFIN_ENABLE_UMFPACK:BOOL=ON
+                    -DUMFPACK_INCLUDE_DIRS=#{Formula["suite-sparse"].opt_include}
+                    -DDOLFIN_ENABLE_VTK:BOOL=ON
+                    -DDOLFIN_ENABLE_CHOLMOD:BOOL=ON
+                    -DCHOLMOD_INCLUDE_DIRS=#{Formula["suite-sparse"].opt_include}
                  ]
 
     ENV["CHOLMOD_DIR"] = "#{Formula["suite-sparse"]}.opt_prefix"
