@@ -35,8 +35,8 @@ before_install:
       export TRAVIS_BUILD_DIR="$(brew --repo)/Library/Taps/optimizers/homebrew-fenics";
       brew install slepc;
       sudo easy_install pip;
-      pip install ply;
-      PETSC_DIR=$(brew --repo)/opt/petsc/real SLEPC_DIR=$(brew --repo)/opt/slepc/real pip install mpi4py petsc4py slepc4py;
+      sudo pip install ply;
+      PETSC_DIR=$(brew --repo)/opt/petsc/real SLEPC_DIR=$(brew --repo)/opt/slepc/real sudo pip install mpi4py petsc4py slepc4py;
     fi
   - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then
       docker pull sjackman/linuxbrew-standalone;
