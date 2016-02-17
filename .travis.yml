@@ -39,7 +39,9 @@ before_install:
       export PETSC_DIR="$(brew --repo)/opt/petsc/real";
       export SLEPC_DIR="$(brew --repo)/opt/slepc/real";
       sudo -H -E pip install mpi4py petsc4py slepc4py;
-      brew install dolfin --without-trilinos;
+      travis_wait brew install boost --without-single --with-mpi;
+      brew install dolfin --without-trilinos --without-vtk --without-hdf5;
+      brew test dolfin;
     fi
   - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then
       docker pull sjackman/linuxbrew-standalone;
