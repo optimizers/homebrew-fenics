@@ -19,7 +19,7 @@ class Dolfin < Formula
 
   depends_on "eigen"
   depends_on "homebrew/science/suite-sparse"
-  depends_on "homebrew/science/vtk" => ["--with-qt"]
+  depends_on "homebrew/science/vtk" => [:recommended, "--with-qt"]
 
   # MPI, PETSc and SLEPc must be installed before installing mpi4py, petsc4py and slepc4py
   depends_on "mpi4py"   => :python
@@ -40,7 +40,7 @@ class Dolfin < Formula
   depends_on "homebrew/science/slepc"    => :recommended if build.with? "mpi"
   depends_on "homebrew/science/scotch"   => :recommended if build.with? "mpi"
 
-  trilinos_deps = [:optional] + ((build.with? "mpi") ? [] : ["without-mpi"])
+  trilinos_deps = [:recommended] + ((build.with? "mpi") ? [] : ["without-mpi"])
   depends_on "homebrew/science/trilinos" => trilinos_deps
 
   depends_on "optimizers/fenics/fiat"
