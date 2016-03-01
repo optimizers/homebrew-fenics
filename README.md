@@ -103,6 +103,23 @@ With everything included (nothing excluded with `--without`) the following shoul
 -- (--) OPENMP
 ```
 
+#### Checking your installation
+
+Type `brew test -v dolfin`. You should see something similar to
+```
+$ brew test -v dolfin
+Testing optimizers/fenics/dolfin
+==> Using the sandbox
+/usr/bin/sandbox-exec -f /tmp/homebrew20160301-44651-1g9sw6y.sb /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby -W0 -I /usr/local/Library/Homebrew -- /usr/local/Library/Homebrew/test.rb /usr/local/Library/Taps/optimizers/homebrew-fenics/dolfin.rb -v
+==> python poisson.py
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Calling DOLFIN just-in-time (JIT) compiler, this may take some time.
+Calling DOLFIN just-in-time (JIT) compiler, this may take some time.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Solving linear variational problem.
+```
+
 #### Demos
 
 Demos can be found under
@@ -112,6 +129,4 @@ Demos can be found under
 
 ## Troubleshooting
 
-##### `Fatal Python error: PyThreadState_Get: no current thread`
-
-You are mixing two Python interpreters. For instance, your virtual environment uses a different Python interpreter than the one used to build the dependencies. See the [Homebrew recommendations](https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Common-Issues.md#python-segmentation-fault-11-on-import-some_python_module).
+See [`TROUBLESHOOTIND.md`](https://github.com/optimizers/homebrew-fenics/blob/master/TROUBLESHOOTING.md).
