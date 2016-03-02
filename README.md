@@ -43,8 +43,8 @@ pip install virtualenvwrapper
 Configure virtualenvwrapper (see the [documentation](http://virtualenvwrapper.readthedocs.org/en/latest/)):
 ```bash
 mkdir -p ~/.virtualenvs
-export WORKON_HOME=$HOME/.virtualenvs >> ~/.bashrc
-source /usr/local/bin/virtualenvwrapper.sh >> ~/.bashrc
+echo "export WORKON_HOME=$HOME/.virtualenvs" >> ~/.bashrc
+echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc
 ```
 
 Open a fresh terminal in order to activate the most recent settings. Then create a virtual environment and activate it:
@@ -69,9 +69,16 @@ PETSC_DIR=/usr/local/opt/petsc/real SLEPC_DIR=/usr/local/opt/slepc/real pip inst
 
 ## Install `dolfin`
 
+A full-featured `dolfin` based on the stable release can be installed with
 ```
 brew install dolfin
 ```
+Should you wish to install from the `master` branch, use
+```
+brew install dolfin --HEAD
+```
+There are options to activate or deactivate extentions. See `brew options
+dolfin` a complete list.
 
 #### Included packages
 
