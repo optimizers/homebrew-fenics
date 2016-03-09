@@ -10,7 +10,7 @@ touch $BUILD_OUTPUT
 
 dump_output() {
    echo "############# Build log(last 1Mb) start #############"
-   tail --bytes=1024 $BUILD_OUTPUT
+   tail -b 2048 $BUILD_OUTPUT
    echo "############# Build log end #########################"
 }
 cleanup() {
