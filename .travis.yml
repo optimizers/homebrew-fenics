@@ -30,6 +30,7 @@ before_install:
   - cd $(brew --repo)/Library/Taps/optimizers/homebrew-fenics;
   - brew tap --repair;
   - export TRAVIS_BUILD_DIR="$(brew --repo)/Library/Taps/optimizers/homebrew-fenics";
+  - brew uninstall boost;
   - brew install slepc;
   - sudo -H easy_install pip;
   - sudo -H pip install ply;
