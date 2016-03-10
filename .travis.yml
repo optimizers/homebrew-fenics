@@ -39,6 +39,7 @@ before_install:
   - sudo -H -E pip install mpi4py petsc4py slepc4py;
   - .travis_helper/travis.sh brew install boost --without-single --with-mpi;
   - brew install sip pyqt
+  - .travis_helper/travis.sh brew install vtk --with-qt;
   - brew install dolfin;
   - brew test dolfin;
   - env | grep TRAVIS | tee /tmp/travis.env
