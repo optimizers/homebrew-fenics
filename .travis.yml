@@ -38,6 +38,7 @@ before_install:
   - export SLEPC_DIR="$(brew --repo)/opt/slepc/real";
   - sudo -H -E pip install mpi4py petsc4py slepc4py;
   - .travis_helper/travis.sh brew install boost --without-single --with-mpi;
+  - brew install sip pyqt
   - brew install dolfin;
   - brew test dolfin;
   - env | grep TRAVIS | tee /tmp/travis.env
