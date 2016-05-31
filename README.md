@@ -136,4 +136,4 @@ Demos can be found under
 
 ## Troubleshooting
 
-See [`TROUBLESHOOTIND.md`](https://github.com/optimizers/homebrew-fenics/blob/master/TROUBLESHOOTING.md).
+See [`TROUBLESHOOTING.md`](https://github.com/optimizers/homebrew-fenics/blob/master/TROUBLESHOOTING.md).
