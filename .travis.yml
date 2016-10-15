@@ -34,8 +34,8 @@ before_install:
   - brew install slepc;
   - sudo -H easy_install pip;
   - sudo -H pip install ply;
-  - export PETSC_DIR="$(brew --repo)/opt/petsc/real";
-  - export SLEPC_DIR="$(brew --repo)/opt/slepc/real";
+  - export PETSC_DIR="$(brew --prefix)/opt/petsc/real";
+  - export SLEPC_DIR="$(brew --prefix)/opt/slepc/real";
   - sudo -H -E pip install mpi4py petsc4py slepc4py;
   - .travis_helper/travis.sh brew install boost --without-single --with-mpi;
   - brew install sip pyqt
