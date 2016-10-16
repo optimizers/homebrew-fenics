@@ -32,7 +32,7 @@ before_install:
   - export TRAVIS_BUILD_DIR="$(brew --repo)/Library/Taps/optimizers/homebrew-fenics";
   - brew uninstall boost;
   # - .travis_helper/travis.sh brew install boost --without-single --with-mpi;
-  - brew install boost --without-single --with-mpi;
+  - travis_wait brew install boost --without-single --with-mpi;
   - brew install slepc;
   - sudo -H easy_install pip;
   - sudo -H pip install ply;
