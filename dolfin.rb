@@ -19,7 +19,7 @@ class Dolfin < Formula
 
   depends_on "eigen"
   depends_on "homebrew/science/suite-sparse"
-  depends_on "homebrew/science/vtk" => [:recommended, "--with-qt"]
+  depends_on "homebrew/science/vtk" => :recommended
 
   # MPI, PETSc and SLEPc must be installed before installing mpi4py, petsc4py and slepc4py
   depends_on "mpi4py"   => :python
