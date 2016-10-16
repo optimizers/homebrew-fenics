@@ -1,8 +1,8 @@
 class Dolfin < Formula
   desc "C++/Python interface of FEniCS"
   homepage "https://bitbucket.org/fenics-project/dolfin"
-  url "https://bitbucket.org/fenics-project/dolfin/downloads/dolfin-1.6.0.tar.gz"
-  sha256 "67eaac5fece6e71da0559b4ca8423156f9e99a952f0620adae449ebebb6695d1"
+  url "https://bitbucket.org/fenics-project/dolfin/downloads/dolfin-2016.1.0.tar.gz"
+  sha256 "6228b4d641829a4cd32141bfcd217a1596a27d5969aa00ee64ebba2b1c0fb148"
   head "https://bitbucket.org/fenics-project/dolfin.git"
 
   option "with-openmp", "Build with an Open-MP-enabled compiler"
@@ -49,6 +49,12 @@ class Dolfin < Formula
   depends_on "optimizers/fenics/instant"
 
   env :std # To properly detect PARMETIS.
+
+  # properly detect HDF5; remove at next upgrade
+  patch do
+    url "https://bitbucket.org/fenics-project/dolfin/commits/38b28c6ec4305cf3f057201792a3f14e5a5a738e/raw"
+    sha256 "cbfcc0859856a59f41fe4e83239449c27f7d9f1bf6b4d06283bdae32bd30684f"
+  end
 
   def onoff(s, cond)
     s + (cond ? "ON" : "OFF")
@@ -99,6 +105,8 @@ class Dolfin < Formula
   end
 
   test do
+    ENV["PYTHONDONTWRITEBYTECODE"] = "1"
+
     (testpath/"poisson.py").write <<-EOS.undent
       from dolfin import *
       mesh = UnitSquareMesh(32, 32)
