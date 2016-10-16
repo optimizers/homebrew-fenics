@@ -1,8 +1,8 @@
 class Ffc < Formula
   desc "FEniCS Form Compiler for finite element variational forms"
   homepage "https://bitbucket.org/fenics-project/ffc"
-  url "https://bitbucket.org/fenics-project/ffc/downloads/ffc-1.6.0.tar.gz"
-  sha256 "382e7713fe759694e5f07506b144eeead681e169e5a34c164ef3da30eddcc1c6"
+  url "https://bitbucket.org/fenics-project/ffc/downloads/ffc-2016.1.0.tar.gz"
+  sha256 "52430ce4c7d57ce1b81eb5fb304992247c944bc6a6054c8b6f42bac81702578d"
   head "https://bitbucket.org/fenics-project/ffc.git"
 
   depends_on :python if MacOS.version <= :snow_leopard
@@ -36,6 +36,8 @@ class Ffc < Formula
   end
 
   test do
+    ENV["PYTHONDONTWRITEBYTECODE"] = "1"
+
     cp_r pkgshare/"test", testpath
     cd "test" do
       system "python", "test.py"

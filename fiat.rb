@@ -1,8 +1,8 @@
 class Fiat < Formula
   desc "FInite element Automatic Tabulator"
   homepage "https://bitbucket.org/fenics-project/fiat"
-  url "https://bitbucket.org/fenics-project/fiat/downloads/fiat-1.6.0.tar.gz"
-  sha256 "858ea3e936ad3b3558b474ffccae8a7b9dddbaafeac77e307115b23753cb1cac"
+  url "https://bitbucket.org/fenics-project/fiat/downloads/fiat-2016.1.0.tar.gz"
+  sha256 "851723126a71bc1ae2dc4ad6e9330bd9b54d52db390dcbbc1f3c759fb49c6aeb"
   head "https://bitbucket.org/fenics-project/fiat.git"
 
   depends_on :python if MacOS.version <= :snow_leopard
@@ -31,6 +31,8 @@ class Fiat < Formula
   end
 
   test do
+    ENV["PYTHONDONTWRITEBYTECODE"] = "1"
+
     cp_r pkgshare/"test", testpath
     cd "test" do
       system "python", "test.py"
