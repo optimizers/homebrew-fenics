@@ -31,15 +31,16 @@ before_install:
   - brew tap --repair;
   - export TRAVIS_BUILD_DIR="$(brew --repo)/Library/Taps/optimizers/homebrew-fenics";
   - brew uninstall boost;
+  - .travis_helper/travis.sh brew install boost --without-single --with-mpi;
   - brew install slepc;
   - sudo -H easy_install pip;
   - sudo -H pip install ply;
   - export PETSC_DIR="$(brew --prefix)/opt/petsc/real";
   - export SLEPC_DIR="$(brew --prefix)/opt/slepc/real";
   - sudo -H -E pip install mpi4py petsc4py slepc4py;
-  - .travis_helper/travis.sh brew install boost --without-single --with-mpi;
   - brew install sip pyqt
-  - .travis_helper/travis.sh brew install vtk --with-qt;
+  - brew install vtk
+  # - .travis_helper/travis.sh brew install vtk --with-qt;
   - brew install dolfin;
   - brew test dolfin;
   - env | grep TRAVIS | tee /tmp/travis.env
